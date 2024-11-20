@@ -3,10 +3,13 @@ package com.example.simpleviewmodel.ui.viewmodel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.simpleviewmodel.model.ListGender
+import com.example.simpleviewmodel.ui.view.FormMahasiswaView
 
 enum class Halaman{
     Form,
@@ -25,6 +28,17 @@ fun Navigasi(
     ){
         composable(
             route = Halaman.Form.name
-        ){}
+        ){
+            val konteks = LocalContext.current
+            FormMahasiswaView(
+                listGender = ListGender.listGender.map { isi ->
+                    konteks.resources.getString(isi)
+                },
+                onSubmitClick = {
+                    viewModel.saveDataMhs(it)
+                    navHost.navigate(Halaman.Data.name)
+                }
+            )
+        }
     }
 }
