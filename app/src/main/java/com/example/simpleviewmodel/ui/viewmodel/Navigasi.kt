@@ -5,6 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 enum class Halaman{
@@ -22,6 +23,8 @@ fun Navigasi(
         navController = navHost,
         startDestination = Halaman.Form.name
     ){
-
+        composable(
+            route = Halaman.Form.name
+        ){}
     }
 }
